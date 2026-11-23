@@ -5,11 +5,12 @@ on:
 
 jobs:
   tests:
-    runs-on: ${{ matrix.os }}
-
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout repository
@@ -20,11 +21,5 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Show project structure
-        shell: bash
-        run: |
-          pwd
-          ls -R
-
       - name: Run unit tests
-        run: python Unit-test/unit-test/test.py
+        run: python unit-tests/tests.py
